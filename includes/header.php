@@ -2,6 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== false) ? '/klinikdoktergigi/' : '/';
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -9,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ratna Dental Care</title>
-  <link rel="stylesheet" href="/klinikdoktergigi/assets/css/site.css?v=2">
+  <link rel="stylesheet" href="<?= $basePath ?>assets/css/site.css?v=2">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -19,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <aside class="admin-sidebar" id="adminSidebar">
     <div class="admin-brand">
       <span class="admin-brand-logo">
-        <img src="/klinikdoktergigi/assets/img/logo.webp" alt="Ratna Dental Care">
+        <img src="<?= $basePath ?>assets/img/logo.webp" alt="Ratna Dental Care">
       </span>
       <span>Ratna Dental</span>
     </div>
@@ -76,7 +77,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <?php else: ?>
 <header class="site-header site-header-app">
   <div class="logo">
-    <img src="/klinikdoktergigi/assets/img/logo.webp" alt="Ratna Dental Care">
+    <img src="<?= $basePath ?>assets/img/logo.webp" alt="Ratna Dental Care">
     <span>Ratna Dental Care</span>
   </div>
   <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>

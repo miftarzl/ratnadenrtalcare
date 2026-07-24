@@ -57,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login - Klinik Dokter Gigi</title>
 
-    <link rel="stylesheet" href="/klinikdoktergigi/assets/css/site.css?v=2">
+<?php $basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== false) ? '/klinikdoktergigi/' : '/'; ?>
+    <link rel="stylesheet" href="<?= $basePath ?>assets/css/site.css?v=2">
 </head>
 <body class="login-page">
     <div class="login-box">

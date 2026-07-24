@@ -10,7 +10,7 @@
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    $basePath = '/klinikdoktergigi/';
+    $basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== false) ? '/klinikdoktergigi/' : '/';
     ?>
 
     <div class="footer-inner">
@@ -23,14 +23,14 @@
             <h4>Link</h4>
             <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] === 'pasien'): ?>
                 <!-- Sudah login sebagai pasien -->
-                <p><a href="/klinikdoktergigi/pasien/dashboard.php">Beranda</a></p>
-                <p><a href="/klinikdoktergigi/pasien/about.php">Tentang Klinik</a></p>
-                <p><a href="/klinikdoktergigi/pasien/reservation.php">Reservasi</a></p>
+                <p><a href="<?= $basePath ?>pasien/dashboard.php">Beranda</a></p>
+                <p><a href="<?= $basePath ?>pasien/about.php">Tentang Klinik</a></p>
+                <p><a href="<?= $basePath ?>pasien/reservation.php">Reservasi</a></p>
             <?php else: ?>
                 <!-- Pengunjung (belum login) -->
-                <p><a href="/klinikdoktergigi/index.php">Beranda</a></p>
-                <p><a href="/klinikdoktergigi/pasien/about.php">Tentang Klinik</a></p>
-                <p><a href="/klinikdoktergigi/login.php">Reservasi</a></p>
+                <p><a href="<?= $basePath ?>index.php">Beranda</a></p>
+                <p><a href="<?= $basePath ?>pasien/about.php">Tentang Klinik</a></p>
+                <p><a href="<?= $basePath ?>login.php">Reservasi</a></p>
             <?php endif; ?>
         </div>
 
