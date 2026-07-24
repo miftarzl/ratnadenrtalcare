@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # 1. Web Application Container (PHP 8.2 + Apache)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: klinik_web
+    restart: always
+    ports:
+      - "8089:80"   # Host port 8089 -> Container port 80
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: rootpassword
+      DB_NAME: klinik_dokter_gigi
+      DB_PORT: 3306
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - klinik_net
+
+  # 2. Database Container (MariaDB / MySQL)
+  db:
+    image: mariadb:10.11
+    container_name: klinik_db
+    restart: always
+    ports:
+      - "3039:3306"  # Host port 3039 -> Container port 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: klinik_dokter_gigi
+    volumes:
+      - db_data:/var/lib/mysql
+      # Auto-import database SQL schema on first start
+      - ./db/klinik_dokter_gigi.sql:/docker-entrypoint-initdb.d/klinik_dokter_gigi.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck-sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - klinik_net
+
+  # 3. Chatbot Flask API Container (Python)
+  chatbot:
+    build:
+      context: ./flask_api
+      dockerfile: Dockerfile
+    container_name: klinik_chatbot
+    restart: always
+    ports:
+      - "5001:5000"  # Host port 5001 -> Container port 5000
+    networks:
+      - klinik_net
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  klinik_net:
+    driver: bridge

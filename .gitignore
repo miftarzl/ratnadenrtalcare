@@ -1,0 +1,11 @@
+# Ignore large AI model ONNX file (>100MB exceeds GitHub limit)
+flask_api/model_chatbot_onnx/model_int8.onnx
+*.onnx
+
+# Environment & Log files
+.env
+*.log
+
+# OS Junk
+.DS_Store
+Thumbs.db
