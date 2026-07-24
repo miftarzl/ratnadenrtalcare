@@ -10,7 +10,10 @@ $basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== fal
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ratna Dental Care</title>
-  <link rel="stylesheet" href="<?= $basePath ?>assets/css/site.css?v=2">
+  <link rel="stylesheet" href="<?= $basePath ?>assets/css/site.css?v=3">
+  <?php if (isset($_SESSION['username']) && ($_SESSION['role'] ?? '') === 'pasien'): ?>
+  <link rel="stylesheet" href="<?= $basePath ?>assets/css/chatbot.css?v=3">
+  <?php endif; ?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -106,6 +109,11 @@ $basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== fal
 <button onclick="scrollToTop()" class="scroll-top" title="Kembali ke Atas"><i class="fas fa-arrow-up"></i></button>
 
 <div class="container">
+
+<?php if (isset($_SESSION['username']) && ($_SESSION['role'] ?? '') === 'pasien'): ?>
+<?php include __DIR__ . '/chatbot_widget.php'; ?>
+<script src="<?= $basePath ?>assets/js/chatbot.js?v=3"></script>
+<?php endif; ?>
 
 <script>
   function toggleMenu() {

@@ -139,7 +139,7 @@ img {
 .scroll-top {
     position: fixed;
     right: 20px;
-    bottom: 20px;
+    bottom: 100px;
     z-index: 998;
     display: none;
     width: 44px;
