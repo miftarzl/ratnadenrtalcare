@@ -82,7 +82,9 @@ function sendMessage() {
     userInput.value = "";
     addTyping();
 
-    fetch("http://127.0.0.1:5001/chatbot", {
+    const chatbotUrl = `${window.location.protocol}//${window.location.hostname}:5001/chatbot`;
+
+    fetch(chatbotUrl, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
