@@ -112,7 +112,7 @@ $basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== fal
 
 <?php if (isset($_SESSION['username']) && ($_SESSION['role'] ?? '') === 'pasien'): ?>
 <?php include __DIR__ . '/chatbot_widget.php'; ?>
-<script src="<?= $basePath ?>assets/js/chatbot.js?v=3"></script>
+<script src="<?= $basePath ?>assets/js/chatbot.js?v=4"></script>
 <?php endif; ?>
 
 <script>

@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <?php include 'includes/chatbot_widget.php'; ?>
 
-<script src="assets/js/chatbot.js"></script>
+<?php $basePath = (strpos($_SERVER['REQUEST_URI'] ?? '', '/klinikdoktergigi/') !== false) ? '/klinikdoktergigi/' : '/'; ?>
+<script src="<?= $basePath ?>assets/js/chatbot.js?v=4"></script>
 
 <?php include 'includes/footer.php'; ?>
