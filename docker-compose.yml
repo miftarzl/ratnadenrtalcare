@@ -54,6 +54,8 @@ services:
     restart: always
     ports:
       - "5001:5000"  # Host port 5001 -> Container port 5000
+    volumes:
+      - ./flask_api:/app
     networks:
       - klinik_net
 
