@@ -82,7 +82,8 @@ function sendMessage() {
     userInput.value = "";
     addTyping();
 
-    const chatbotUrl = `${window.location.protocol}//${window.location.hostname}:5001/chatbot`;
+    const basePath = window.location.pathname.includes('/klinikdoktergigi/') ? '/klinikdoktergigi/' : '/';
+    const chatbotUrl = `${basePath}api_chatbot.php`;
 
     fetch(chatbotUrl, {
         method: "POST",
